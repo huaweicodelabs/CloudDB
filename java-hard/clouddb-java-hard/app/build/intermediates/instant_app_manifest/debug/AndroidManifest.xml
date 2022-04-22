@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.huawei.agc.clouddb.quickstart"
+    android:targetSandboxVersion="2"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="23"
+        android:targetSdkVersion="30" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <application
+        android:name="com.huawei.agc.clouddb.quickstart.CloudDBQuickStartApplication"
+        android:allowBackup="false"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:debuggable="true"
+        android:extractNativeLibs="false"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_launcher"
+        android:supportsRtl="true"
+        android:testOnly="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.huawei.agc.clouddb.quickstart.MainActivity"
+            android:label="@string/book_manager_title" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.huawei.agc.clouddb.quickstart.EditActivity"
+            android:exported="false"
+            android:label="@string/add_book" >
+            <intent-filter>
+                <action android:name="com.huawei.agc.clouddb.quickstart.ADD" />
+                <action android:name="com.huawei.agc.clouddb.quickstart.SEARCH" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.huawei.agconnect.core.ServiceDiscovery"
+            android:exported="false" >
+            <meta-data
+                android:name="com.huawei.agconnect.auth.AuthServiceRegistrar"
+                android:value="com.huawei.agconnect.core.ServiceRegistrar" />
+            <meta-data
+                android:name="com.huawei.agconnect.credential.CredentialServiceRegistrar:100"
+                android:value="com.huawei.agconnect.core.ServiceRegistrar" />
+            <meta-data
+                android:name="com.huawei.agconnect.api.ApiServiceRegistrar"
+                android:value="com.huawei.agconnect.core.ServiceRegistrar" />
+        </service>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <provider
+            android:name="com.huawei.agconnect.core.provider.AGConnectInitializeProvider"
+            android:authorities="com.huawei.agc.clouddb.quickstart.AGCInitializeProvider"
+            android:exported="false" />
+    </application>
+
+</manifest>
