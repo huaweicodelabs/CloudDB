@@ -1,0 +1,43 @@
+<script>
+  import agconnect from "@agconnect/api";
+  import "@agconnect/instance";
+  import "@agconnect/cloudstorage";
+  import "@agconnect/function";
+  import "@agconnect/database";
+
+  const agconnectConfig = require('../agconnect-services.json');
+
+  function login() {
+    console.log("login")
+    /**
+     * TODO
+     * Please use the configuration mode to log in.
+     */
+    agconnect.auth().signInAnonymously().then(user => {
+      if (!user) {
+        return Promise.reject("login failed.");
+      }
+      return Promise.resolve("login successfully.");
+    }).then(() => {
+      console.log("login successfully.");
+    }).catch(e => {
+      console.error("getCurrentUser error!" + e)
+    });
+  }
+
+  module.exports = {
+    onCreate() {
+      console.info('Application onCreate');
+      agconnect.instance().configInstance(agconnectConfig);
+      login();
+    },
+    onDestroy() {
+      console.info('Application onDestroy');
+    },
+    dataApp: {
+      localeData: {}
+    },
+    agc: agconnect,
+    agconnectConfig: agconnectConfig
+  }
+</script>

@@ -1,0 +1,54 @@
+{
+  "package": "com.huawei.quick.codelab.cloudDB",
+  "name": "CloudDB",
+  "versionName": "1.0.0",
+  "versionCode": 1,
+  "icon": "/Common/logo.png",
+  "minPlatformVersion": 1078,
+  "features": [
+    {
+      "name": "system.cipher"
+    },
+    {
+      "name": "system.configuration"
+    },
+    {
+      "name": "system.device"
+    },
+    {
+      "name": "system.fetch"
+    },
+    {
+      "name": "system.websocketfactory"
+    },
+    {
+      "name": "system.downloadtask"
+    },
+    {
+      "name": "system.request"
+    },
+    {
+      "name": "system.requesttask"
+    },
+    {
+      "name": "system.uploadtask"
+    },
+    {
+      "name": "system.storage"
+    },
+    {
+      "name": "system.prompt"
+    }
+  ],
+  "config": {},
+  "router": {
+    "entry": "homepage",
+    "pages": {
+      "homepage": {
+        "component": "index"
+      }
+    }
+  },
+  "versionType": "debug",
+  "debugable": true
+}

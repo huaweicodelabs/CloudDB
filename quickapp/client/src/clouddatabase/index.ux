@@ -1,0 +1,43 @@
+<template>
+  <!-- Only one root node is allowed in template. -->
+  <div class="container">
+    <div class="button">
+=
+    </div>
+    <list>
+      <list-item type="book" for="{{booklist}}">
+        <text class="list">bookName:{{$item.bookName}} author:{{$item.author}} price:{{$item.price}}</text>
+      </list-item>
+    </list>
+  </div>
+</template>
+
+<style>
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+
+  .button {
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+
+  input {
+    padding: 20px;
+    margin: 10px;
+  }
+
+  .list {
+    font-size: 40px;
+    margin: 10px;
+  }
+</style>
+
+<script>
+ 
+</script>

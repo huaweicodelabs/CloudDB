@@ -1,0 +1,4 @@
+{
+"quickappRoot":"./client",
+"cloudfunctionRoot":"./cloudfunctions"
+}

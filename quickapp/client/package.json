@@ -1,0 +1,27 @@
+{
+  "name": "com.zyb.test001",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "fa-build": "node node_modules/webpack/bin/webpack.js --progress --config ./node_modules/fa-toolkit/webpack.config.js",
+    "fa-watch": "node node_modules/webpack/bin/webpack.js --watch --progress --config ./node_modules/fa-toolkit/webpack.config.js",
+    "fa-release": "node ./node_modules/cross-env/src/bin/cross-env.js uglifyjs=true sign=release node_modules/webpack/bin/webpack.js --progress --config ./node_modules/fa-toolkit/webpack.config.js"
+  },
+  "devDependencies": {
+    "assert": "^2.0.0",
+    "browserify-zlib": "^0.2.0",
+    "buffer": "^6.0.3",
+    "cross-env": "^7.0.2",
+    "crypto-browserify": "^3.12.0",
+    "fa-toolkit": "^12.6.1-Stable.301",
+    "stream-browserify": "^3.0.0",
+    "util": "^0.12.4"
+  },
+  "dependencies": {
+    "@agconnect/core": "^1.3.0",
+    "@agconnect/auth": "^1.3.0",
+    "@agconnect/cloudstorage": "^1.2.1",
+    "@agconnect/database": "^1.0.0",
+    "@agconnect/function": "^1.3.0"
+  }
+}

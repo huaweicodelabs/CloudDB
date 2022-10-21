@@ -1,0 +1,18 @@
+{
+  "package": "com.huawei.quick.codelab.cloudDB",
+  "name": "CloudDB",
+  "versionName": "1.0.0",
+  "versionCode": 1,
+  "icon": "/Common/logo.png",
+  "minPlatformVersion": 1078,
+  "features": [],
+  "config": {},
+  "router": {
+    "entry": "homepage",
+    "pages": {
+      "homepage": {
+        "component": "index"
+      }
+    }
+  }
+}

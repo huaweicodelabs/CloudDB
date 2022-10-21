@@ -1,0 +1,54 @@
+<template>
+  <!-- Only one root node is allowed in template. -->
+  <div class="container">
+    <image class="img" src="{{imgPath}}"></image>
+    <input type="button" value="upLoad" onclick="upLoad" />
+    <input type="button" value="getLogo" onclick="getFileUrl" />
+  </div>
+</template>
+
+<style>
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+
+  input {
+    padding: 20px;
+    margin: 10px;
+  }
+
+  .img {
+    height: 200px;
+    width: 200px;
+    border: 1px solid #000000;
+  }
+</style>
+
+<script>
+  let referenceChild;
+  module.exports = {
+    data: {
+      imgPath: ''
+    },
+    onInit: function () {
+      let storageManagement = this.$app.$def.agc.cloudStorage();
+      let storageReference = storageManagement.storageReference();
+      referenceChild = storageReference.child('logo.png');
+    },
+    upLoad() {
+      var fileMetadata = referenceChild.put4QuickApp("/Common/logo.png");
+      console.log(JSON.stringify(fileMetadata))
+    },
+    getFileUrl() {
+      referenceChild.getDownloadURL().then(downloadURL => {
+        console.log("get url : " + downloadURL);
+        this.imgPath = downloadURL;
+      }).catch(err => {
+        console.error(err);
+      });
+    },
+  }
+</script>

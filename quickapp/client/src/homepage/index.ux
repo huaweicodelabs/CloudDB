@@ -1,0 +1,91 @@
+<template>
+  <!-- Only one root node is allowed in template. -->
+  <div class="container">
+    <textarea class="content" placeholder="输入备忘内容" onchange="textChanged">{{message}}</textarea>
+    <input type="button" value="提交" onclick="submit" />
+  </div>
+</template>
+
+<style>
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+  .content {
+    background-color: #ffffff;
+    height: 300px;
+    width: 700px;
+    border: 1px solid #000000;
+    font-size: 30px;
+    border-radius: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+  }
+  input {
+    padding: 20px;
+    margin: 10px;
+    width: 700px;
+    background-color: #1e90ff;
+    border-radius: 16px;
+  }
+</style>
+
+<script>
+  import { AGConnectCloudDB, CloudDBZoneConfig, CloudDBZoneQuery } from '@agconnect/database';
+  import agconnect from "@agconnect/api";
+  import { CloudText } from "../model/CloudText";
+  import prompt from '@system.prompt';
+  const context = require('../../agconnect-services.json');
+  const schema = require('../Common/Codelab_1_cn');
+
+  let cloudDBZone;
+  module.exports = {
+    data: {
+      message: ""
+    },
+    onInit: function () {
+      AGConnectCloudDB.initialize(context);
+      const agcCloudDB = AGConnectCloudDB.getInstance()
+      agcCloudDB.createObjectType(schema)
+      const config = new CloudDBZoneConfig('common');
+      agcCloudDB.openCloudDBZone(config).then(zone => {
+        cloudDBZone = zone;
+        this.queryData();
+      }).catch(err => {
+        console.error(err)
+      })
+    },
+    submit: function () {
+      const commentInfo = new CloudText();
+      commentInfo.setId("1111");
+      commentInfo.setContext(this.message);
+
+      cloudDBZone.executeUpsert(commentInfo).then(result => {
+        prompt.showToast({
+          message: "提交成功",
+          duration: 2000,
+          gravity: 'center'
+        })
+      }).catch(error => {
+        console.error("写入失败：", error);
+      });
+    },
+    textChanged: function (e) {
+      this.message = e.text;
+    },
+    queryData: function () {
+      const query = CloudDBZoneQuery.where(CloudText).equalTo('Id', "1111");
+      cloudDBZone.executeQuery(query).then(snapshot => {
+        const resultArray = snapshot.getSnapshotObjects();
+        console.log("resultArray",  resultArray.length);
+        console.log("message",  JSON.stringify(resultArray));
+        if (resultArray.length > 0) {
+          this.message = resultArray[0].context;
+        }
+      })
+    }
+  }
+</script>
