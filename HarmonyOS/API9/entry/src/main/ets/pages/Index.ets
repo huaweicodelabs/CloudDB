@@ -27,7 +27,13 @@ struct Index {
   build() {
     Column() {
       Row() {
-        Button('添加数据', { type: ButtonType.Capsule, stateEffect: true }).backgroundColor(0x317aff).width('90%').margin({top: 10})
+        Button('查询数据', { type: ButtonType.Capsule, stateEffect: true }).backgroundColor(0x317aff).width('40%').margin({top: 10, right: 10})
+          .onClick(async () => {
+            // 查询数据
+            this.bookInfoList = await CloudDB.queryRecord();
+          })
+
+        Button('添加数据', { type: ButtonType.Capsule, stateEffect: true }).backgroundColor(0x317aff).width('40%').margin({top: 10})
           .onClick(() => {
             // 添加数据
             router.pushUrl({

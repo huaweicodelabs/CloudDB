@@ -1,13 +1,13 @@
 {
+  "license": "",
+  "devDependencies": {},
+  "author": "",
   "name": "entry",
-  "version": "1.0.0",
   "description": "Please describe the basic information.",
   "main": "",
-  "author": "",
-  "license": "",
+  "version": "1.0.0",
   "dependencies": {
     "@hw-agconnect/database-ohos": "^1.1.2",
     "@hw-agconnect/core-ohos": "^1.1.2"
   }
 }
-
